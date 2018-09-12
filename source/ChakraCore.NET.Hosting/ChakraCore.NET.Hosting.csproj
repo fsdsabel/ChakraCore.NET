@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.4;netstandard2.0;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks>net47;netstandard1.4;netstandard2.0</TargetFrameworks>
     <Authors>QianFan Jiang (John Masen)</Authors>
     <Company />
     <Product />
@@ -15,6 +15,11 @@
     <PackageReleaseNotes>add debugging support</PackageReleaseNotes>
     <AssemblyVersion>1.0.2.0</AssemblyVersion>
     <FileVersion>1.0.2.0</FileVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)key.snk</AssemblyOriginatorKeyFile>
+    <PackageId>ChakraCore.NET.Hosting.StrongName</PackageId>
+    
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.6" />
@@ -35,5 +40,5 @@
   <ItemGroup>
     <ProjectReference Include="..\ChakraCore.NET\ChakraCore.NET.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+  <!--<Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />-->
 </Project>

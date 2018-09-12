@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
+    <TargetFrameworks>net47;netstandard1.4</TargetFrameworks>
     <Authors>QianFan Jiang (John Masen)</Authors>
     <Company>QianFan Jiang (John Masen)</Company>
     <Product>ChakraCore.NET</Product>
@@ -15,10 +15,19 @@
     <PackageReleaseNotes>fixed incorrect engine initlize sequence</PackageReleaseNotes>
     <AssemblyVersion>1.0.1.0</AssemblyVersion>
     <FileVersion>1.0.1.0</FileVersion>
+    <PackageId>ChakraCore.NET.DebugAdapter.VSCode.StrongName</PackageId>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)key.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ChakraCore.NET.Core\ChakraCore.NET.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework) == 'net47'">
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
 
 </Project>
