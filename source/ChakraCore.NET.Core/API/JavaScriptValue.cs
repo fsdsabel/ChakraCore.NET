@@ -617,9 +617,9 @@
         public new string ToString()
         {
             Native.ThrowIfError(Native.JsGetStringLength(this, out int bufferSize));
-            StringBuilder sb = new StringBuilder(bufferSize);
-            Native.ThrowIfError(Native.JsCopyStringUtf16(this, 0, bufferSize, sb, out UIntPtr size));
-            string ss = sb.ToString(0, (int)size);
+            char[] buffer = new char[bufferSize];
+            Native.ThrowIfError(Native.JsCopyStringUtf16(this, 0, bufferSize, buffer, out UIntPtr size));
+            string ss = new string(buffer, 0, (int) size);
             return ss;
         }
 
