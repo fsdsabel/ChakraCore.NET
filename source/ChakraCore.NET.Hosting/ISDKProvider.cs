@@ -6,6 +6,6 @@ namespace ChakraCore.NET.Hosting
 {
     public interface ISDKProvider
     {
-        string GetSDK();
+        ModuleInfo GetSDK();
     }
 }

@@ -61,12 +61,12 @@ namespace ChakraCore.NET.UnitTest
 
         protected void runModule(string fileName)
         {
-            context.RunModule(Properties.Resources.ResourceManager.GetString(fileName), (name) => Properties.Resources.ResourceManager.GetString(name));
+            context.RunModule(Properties.Resources.ResourceManager.GetString(fileName), (name) => new ModuleInfo { SourceCode = Properties.Resources.ResourceManager.GetString(name) });
         }
 
         protected JSValue projectModuleClass(string moduleName,string className)
         {
-            return context.ProjectModuleClass(moduleName, className, (name) => Properties.Resources.ResourceManager.GetString(name));
+            return context.ProjectModuleClass(moduleName, className, (name) => new ModuleInfo { SourceCode = Properties.Resources.ResourceManager.GetString(name) });
         }
         protected  void Log(string text)
         {

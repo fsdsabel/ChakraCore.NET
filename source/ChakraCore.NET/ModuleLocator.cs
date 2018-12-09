@@ -22,7 +22,7 @@ namespace ChakraCore.NET
         }
         public List<string> SearchPatterns { get; private set; }
 
-        public string LoadModule(string name)
+        public ModuleInfo LoadModule(string name)
         {
             foreach (var item in SearchPatterns)
             {
@@ -31,7 +31,11 @@ namespace ChakraCore.NET
                 {
                     try
                     {
-                        return File.ReadAllText(info.FullName);
+                        return new ModuleInfo
+                        {
+                            SourceCode = File.ReadAllText(info.FullName),
+                            Url = info.FullName
+                        };
                     }
                     catch (Exception ex)
                     {

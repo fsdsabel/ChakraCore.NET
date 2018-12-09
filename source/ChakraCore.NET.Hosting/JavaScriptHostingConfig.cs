@@ -16,7 +16,7 @@ namespace ChakraCore.NET.Hosting
         public const string MODULE_LOADER_PROTOCOL_SDK = "sdk";
         public const string PLUGIN_LOADER_PROTOCOL_INSTANCE = "instance";
         public ProtocolResolver<IPluginInstaller> RequireNativeResolver { get; private set; } = new ProtocolResolver<IPluginInstaller>(PLUGIN_LOADER_PROTOCOL_INSTANCE);
-        public ProtocolResolver<string> ModuleScriptResolver { get; private set; } = new ProtocolResolver<string>(MODULE_LOADER_PROTOCOL_FILE);
+        public ProtocolResolver<ModuleInfo> ModuleScriptResolver { get; private set; } = new ProtocolResolver<ModuleInfo>(MODULE_LOADER_PROTOCOL_FILE);
 
         public List<LoadPluginInstallerFunction> PluginLoaders { get; private set; } = new List<LoadPluginInstallerFunction>();
         public List<LoadModuleFunction> ModuleFileLoaders { get; private set; } = new  List<LoadModuleFunction>();
@@ -40,7 +40,7 @@ namespace ChakraCore.NET.Hosting
             ModuleScriptResolver.Add(loadModuleFile);//add default file loader resolver
             ModuleScriptResolver.Add(MODULE_LOADER_PROTOCOL_SDK, (name)=> 
             {
-                string result = createInstance<ISDKProvider>(name)?.GetSDK();
+                var result = createInstance<ISDKProvider>(name)?.GetSDK();
                 if (result==null)
                 {
                     foreach (var item in PluginLoaders)
@@ -83,7 +83,7 @@ namespace ChakraCore.NET.Hosting
             return Activator.CreateInstance(t) as T;
         }
 
-        private string loadModuleFile(string name)
+        private ModuleInfo loadModuleFile(string name)
         {
             foreach (var item in ModuleFileLoaders)
             {
@@ -105,7 +105,7 @@ namespace ChakraCore.NET.Hosting
 
 
 
-        public string LoadModule(string name) => ModuleScriptResolver.Process(name);
+        public ModuleInfo LoadModule(string name) => ModuleScriptResolver.Process(name);
 
         public IPluginInstaller LoadPlugin(string name) => RequireNativeResolver.Process(name);
 

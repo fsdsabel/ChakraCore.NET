@@ -13,9 +13,9 @@ namespace ChakraCore.NET.Plugin.Common
 
         public string Name => "Echo";
 
-        public string GetSDK()
+        public ModuleInfo GetSDK()
         {
-            return Properties.Resources.echo;
+            return new ModuleInfo { SourceCode = Properties.Resources.echo };
         }
 
         public void Install(JSValue target)

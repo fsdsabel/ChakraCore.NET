@@ -41,5 +41,7 @@ namespace ChakraCore.NET
             set { runtime.Disabled = value; }
         }
 
+        public JavaScriptRuntime Runtime => this.runtime;
+
     }
 }

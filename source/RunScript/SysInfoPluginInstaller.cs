@@ -9,9 +9,9 @@ namespace RunScript
     {
         public string Name => "SysInfo";
 
-        public string GetSDK()
+        public ModuleInfo GetSDK()
         {
-            return Properties.Resources.info;
+            return new ModuleInfo { SourceCode = Properties.Resources.info };
         }
 
         public void Install(JSValue stub)

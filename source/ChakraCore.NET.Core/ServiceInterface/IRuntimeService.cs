@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChakraCore.NET.API;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,5 +28,10 @@ namespace ChakraCore.NET
         /// Indicates if the runtime is able to execute script
         /// </summary>
         bool Disabled { get; set; }
+
+        /// <summary>
+        /// Gets the associated runtime.
+        /// </summary>
+        JavaScriptRuntime Runtime { get; }
     }
 }

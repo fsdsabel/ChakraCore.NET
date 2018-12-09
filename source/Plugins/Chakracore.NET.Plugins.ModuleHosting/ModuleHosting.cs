@@ -41,7 +41,7 @@ namespace ChakraCore.NET.Plugin.ModuleHosting
             return JavaScriptHosting.Default.GetModuleClassAsync<HostingProxy>(Resources.JSProxy, moduleName, className, config);
         }
 
-        public string GetSDK()=> Resources.Hosting;
+        public ModuleInfo GetSDK() => new ModuleInfo { SourceCode = Resources.Hosting };
         
     }
 }

@@ -12,13 +12,13 @@ namespace ChakraCore.NET.Hosting
 {
     public static class JavaScriptHostingConfigHelper
     {
-        public static JavaScriptHostingConfig AddModuleScript<T>(this JavaScriptHostingConfig config,string name,string script) 
+        public static JavaScriptHostingConfig AddModuleScript<T>(this JavaScriptHostingConfig config,string name,string script, string url = null) 
         {
             config.ModuleFileLoaders.Add((n)=> 
             {
                 if (n==name)
                 {
-                    return script; ;
+                    return new ModuleInfo { SourceCode = script, Url = url };
                 }
                 return null;
             });

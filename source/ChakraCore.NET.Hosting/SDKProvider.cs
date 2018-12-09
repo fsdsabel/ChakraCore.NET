@@ -11,7 +11,7 @@ namespace ChakraCore.NET.Hosting
         {
             sdk = sdkScript;
         }
-        public string GetSDK() => sdk;
+        public ModuleInfo GetSDK() => new ModuleInfo { SourceCode = sdk };
         
     }
 }

@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net47</TargetFramework>
+    <Authors>Daniel Sabel</Authors>
+    <Company>Daniel Sabel</Company>
+    <Product>ChakraCore.NET</Product>
+    <Description>
+      Alternative Visual Studio Code Debug adapter for ChakraCore.NET. This is based on https://github.com/Microsoft/ChakraCore-Debugger.
+    </Description>
+    <PackageLicenseUrl>https://github.com/JohnMasen/ChakraCore.NET/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/fsdsabel/ChakraCore.NET</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/fsdsabel/ChakraCore.NET</RepositoryUrl>
+    <PackageTags>chakracore,netcore</PackageTags>
+    <Version>1.0.0</Version>
+    <PackageReleaseNotes>This is the initial release.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <PackageId>ChakraCore.NET.DebugAdapter2.VSCode.StrongName</PackageId>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)key.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChakraCore.NET.DebugAdapter2.VSCode\ChakraCore.NET.DebugAdapter2.VSCode.vcxproj">
+      <Private>false</Private>
+      <ExcludeAssets>all</ExcludeAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="costura32\" />
+    <Folder Include="costura64\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\ChakraCore.NET.DebugAdapter2.VSCode\bin\Win32\$(Configuration)\ChakraCore.NET.DebugAdapter2.VSCode.dll" Link="costura32\ChakraCore.NET.DebugAdapter2.VSCode.dll" />
+    <EmbeddedResource Include="..\ChakraCore.NET.DebugAdapter2.VSCode\bin\x64\$(Configuration)\ChakraCore.NET.DebugAdapter2.VSCode.dll" Link="costura64\ChakraCore.NET.DebugAdapter2.VSCode.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="3.2.1">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="ModuleInit.Fody" Version="1.8.3">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

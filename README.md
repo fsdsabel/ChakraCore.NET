@@ -32,7 +32,8 @@ Debugging:
 The debug extension is available at VSCode marketplace, you can find a simple how-to at https://github.com/JohnMasen/ChakraCore.NET/issues/12 .
 ![image](https://user-images.githubusercontent.com/7631912/39090476-2761c618-4613-11e8-963f-8c942b9851a4.png)
 
-
+Alternative debugging:
+Use the node debugging extension together with `ChakraCore.NET.DebugAdapter2.VSCode.StrongName`. This method is more stable but can only be used for .NET 4.7 clients. It is based on the official Microsoft Debugging adapter at https://github.com/Microsoft/ChakraCore-Debugger. You can find an example use at https://github.com/fsdsabel/ChakraCore-Samples.
 
 ## Platform
 This library is build with NetStandard 1.4 and Chakracore 1.7.3 

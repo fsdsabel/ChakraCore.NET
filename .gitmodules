@@ -1,0 +1,3 @@
+[submodule "dependencies\\ChakraCore-Debugger"]
+	path = dependencies\\ChakraCore-Debugger
+	url = https://github.com/Microsoft/ChakraCore-Debugger.git

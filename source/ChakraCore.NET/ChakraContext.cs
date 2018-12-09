@@ -151,7 +151,7 @@ namespace ChakraCore.NET
         /// </summary>
         /// <param name="script">script content</param>
         /// <param name="loadModuleCallback">callback to load imported script content</param>
-        public void RunModule(string script, Func<string, string> loadModuleCallback)
+        public void RunModule(string script, LoadModuleDelegate loadModuleCallback)
         {
             ServiceNode.GetService<IContextService>().RunModule(script, loadModuleCallback);
         }
@@ -163,14 +163,14 @@ namespace ChakraCore.NET
         /// <param name="className">class name to create an instance</param>
         /// <param name="loadModuleCallback">local module script by name callback </param>
         /// <returns>the mapped value</returns>
-        public JSValue ProjectModuleClass(string moduleName, string className, Func<string, string> loadModuleCallback, string projectTo = null)
+        public JSValue ProjectModuleClass(string moduleName, string className, LoadModuleDelegate loadModuleCallback, string projectTo = null)
         {
             string template = "import { {className} } from '{moduleName}'; {projectTo}=new {className}();";
             return ProjectModuleClass(template, moduleName, className, loadModuleCallback, projectTo);
         }
 
 
-        public JSValue ProjectModuleClass(string proxyModuleScriptTemplate, string moduleName, string className, Func<string, string> loadModuleCallback, string projectTo = null)
+        public JSValue ProjectModuleClass(string proxyModuleScriptTemplate, string moduleName, string className, LoadModuleDelegate loadModuleCallback, string projectTo = null)
         {
             if (string.IsNullOrWhiteSpace(projectTo))
             {

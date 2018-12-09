@@ -11,7 +11,16 @@ namespace ChakraCore.NET
     {
         string RunScript(string script);
         JavaScriptValue ParseScript(string script);
-        void RunModule(string script, Func<string, string> loadModuleCallback);
+        void RunModule(string script, LoadModuleDelegate loadModuleCallback);
         CancellationTokenSource ContextShutdownCTS { get; }
     }
+
+    public class ModuleInfo
+    {
+        public string SourceCode { get; set; }
+
+        public string Url { get; set; }
+    }
+
+    public delegate ModuleInfo LoadModuleDelegate(string name);
 }

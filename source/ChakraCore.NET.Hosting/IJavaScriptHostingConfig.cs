@@ -6,7 +6,7 @@ namespace ChakraCore.NET.Hosting
 {
     public interface IJavaScriptHostingConfig
     {
-        string LoadModule(string name);
+        ModuleInfo LoadModule(string name);
         
 
         IPluginInstaller LoadPlugin(string name);

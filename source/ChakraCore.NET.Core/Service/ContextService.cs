@@ -8,6 +8,8 @@ using ChakraCore.NET.API;
 
 namespace ChakraCore.NET
 {
+   
+
     public class ContextService : ServiceBase, IContextService
     {
         private class moduleItem
@@ -48,7 +50,7 @@ namespace ChakraCore.NET
               });
         }
 
-        public void RunModule(string script,Func<string,string> loadModuleCallback)
+        public void RunModule(string script, LoadModuleDelegate loadModuleCallback)
         {
             moduleLoadException = null;
             JavaScriptModuleRecord rootRecord = contextSwitch.With(() =>
@@ -57,7 +59,7 @@ namespace ChakraCore.NET
                 {
                     if (string.IsNullOrEmpty(name))
                     {
-                        return script;
+                        return new ModuleInfo { SourceCode = script };
                     }
                     else
                     {
@@ -114,7 +116,7 @@ namespace ChakraCore.NET
             },ContextShutdownCTS.Token);
         }
 
-        private JavaScriptModuleRecord createModule(JavaScriptModuleRecord? parent, string name, Func<string, string> loadModuleCallback)
+        private JavaScriptModuleRecord createModule(JavaScriptModuleRecord? parent, string name, LoadModuleDelegate loadModuleCallback)
         {
             bool isCreateFromSourceCode = string.IsNullOrEmpty(name);
             
@@ -156,8 +158,13 @@ namespace ChakraCore.NET
 
             Action parseModule = () =>
              {
-                 string script = loadModuleCallback(name);
-                 JavaScriptModuleRecord.ParseScript(result,script,debugService.GetScriptContext(name,script) );
+                 var scriptInfo = loadModuleCallback(name);
+                 if(!string.IsNullOrEmpty(scriptInfo.Url))
+                 {
+                     JavaScriptModuleRecord.SetHostUrl(result, scriptInfo.Url);
+                 }
+
+                 JavaScriptModuleRecord.ParseScript(result,scriptInfo.SourceCode,debugService.GetScriptContext(name,scriptInfo.SourceCode) );
                  //debugService.AddScriptSource(name, script);
                  System.Diagnostics.Debug.WriteLine($"module {name} Parsed");
              };

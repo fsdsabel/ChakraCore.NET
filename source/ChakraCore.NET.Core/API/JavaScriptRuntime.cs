@@ -34,7 +34,7 @@
         {
             get { return handle != IntPtr.Zero; }
         }
-
+        
         /// <summary>
         ///     Gets the current memory usage for a runtime.
         /// </summary>

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ChakraCore.NET.Hosting
 {
-    public delegate string LoadModuleFunction(string name);
+    public delegate ModuleInfo LoadModuleFunction(string name);
     public delegate IPluginInstaller LoadPluginInstallerFunction(string name);
 
     public class JavaScriptHosting
