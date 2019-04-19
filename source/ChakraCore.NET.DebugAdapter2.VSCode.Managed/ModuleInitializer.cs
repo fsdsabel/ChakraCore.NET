@@ -10,7 +10,9 @@
         /// </summary>
         public static void Initialize()
         {
+#if NET47
             CosturaUtility.Initialize();
+#endif
         }
     }
 

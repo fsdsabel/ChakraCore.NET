@@ -6,7 +6,17 @@ var platforms = new [] { PlatformTarget.x64, PlatformTarget.x86 };
 Task("Dependencies")
   .Does(() =>
 {
-  DirectoryPath vsCpp = VSWhereLatest();
+  //git submodule update --init --recursive
+  StartProcess("git", new ProcessSettings {
+    Arguments = new ProcessArgumentBuilder()
+      .Append("submodule")
+      .Append("update")
+      .Append("--init")
+      .Append("--recursive")
+  });
+
+
+  DirectoryPath vsCpp = VSWhereAll(new VSWhereAllSettings { Version = "[\"15.0\",\"16.0\"]" }).FirstOrDefault();
   if(vsCpp != null) {
     var sln = "./dependencies/ChakraCore-Debugger/ChakraCore.Debugger.sln";
     NuGetRestore(sln);
@@ -32,7 +42,8 @@ Task("Default")
   .IsDependentOn("Dependencies")
   .Does(() =>
 {   
-  DirectoryPath vsCpp = VSWhereLatest();
+  DirectoryPath vsCpp = VSWhereAll(new VSWhereAllSettings { Version = "[\"15.0\",\"16.0\"]" }).FirstOrDefault();
+  
   if(vsCpp != null) {
     foreach(var platform in platforms)     
     {
